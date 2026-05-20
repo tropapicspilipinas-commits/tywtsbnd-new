@@ -33,15 +33,10 @@ export default async function LettersToGeloyPage() {
           Letters to Geloy
         </h1>
 
-        <p className="mt-6 text-sm opacity-40">
-          by Geloy Concepcion
-        </p>
+        <p className="mt-6 text-sm opacity-40">by Geloy Concepcion</p>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
-          <a
-            href="/"
-            className="opacity-40 hover:opacity-100 transition"
-          >
+          <a href="/" className="opacity-40 hover:opacity-100 transition">
             Unspoken Words
           </a>
 
@@ -52,10 +47,7 @@ export default async function LettersToGeloyPage() {
             Letters to Geloy
           </a>
 
-          <a
-            href="/submit"
-            className="opacity-40 hover:opacity-100 transition"
-          >
+          <a href="/submit" className="opacity-40 hover:opacity-100 transition">
             Submit
           </a>
         </nav>
@@ -65,7 +57,6 @@ export default async function LettersToGeloyPage() {
       <section className="relative min-h-[7200px] hidden md:block">
         {letters?.map((letter, index) => {
           const row = Math.floor(index / 3);
-
           const top = row * 420 + randomBetween(120, 260);
           const left = (index % 3) * 30 + randomBetween(4, 18);
 
@@ -95,31 +86,27 @@ export default async function LettersToGeloyPage() {
         })}
       </section>
 
-      {/* MOBILE SCATTERED */}
-      <section className="md:hidden relative min-h-[6200px] px-4 pb-32">
+      {/* MOBILE SAFE SCATTER */}
+      <section className="md:hidden px-4 pb-32 pt-6">
         {letters?.map((letter, index) => {
-          const row = Math.floor(index / 2);
-
-          const top = row * 250 + randomBetween(80, 180);
-          const left = (index % 2) * 42 + randomBetween(2, 14);
+          const alignments = ["ml-0", "ml-auto", "mx-auto"];
+          const widths = ["max-w-[150px]", "max-w-[190px]", "max-w-[230px]"];
+          const margins = ["mb-20", "mb-28", "mb-36"];
 
           return (
             <p
               key={letter.id}
               className={`
-                absolute
-                max-w-[160px]
                 leading-relaxed
                 transition-opacity
                 hover:opacity-100
                 ${fonts[index % fonts.length]}
                 ${mobileSizes[index % mobileSizes.length]}
                 ${opacities[index % opacities.length]}
+                ${alignments[index % alignments.length]}
+                ${widths[index % widths.length]}
+                ${margins[index % margins.length]}
               `}
-              style={{
-                top: `${top}px`,
-                left: `${left}%`,
-              }}
             >
               {letter.content}
             </p>

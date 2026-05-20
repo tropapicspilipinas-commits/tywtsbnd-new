@@ -11,7 +11,7 @@ export default async function LettersToGeloyPage() {
     .eq("category", "geloy")
     .eq("approved", true)
     .order("created_at", { ascending: false })
-    .limit(20);
+    .limit(100);
 
   if (error) {
     return (
@@ -22,38 +22,39 @@ export default async function LettersToGeloyPage() {
   }
 
   const fonts = ["font-sans", "font-serif", "italic"];
-  const sizes = ["text-sm", "text-base", "text-lg"];
-  const opacities = ["opacity-40", "opacity-50", "opacity-60", "opacity-75"];
+  const sizes = ["text-xs", "text-sm", "text-base", "text-lg"];
+  const mobileSizes = ["text-[10px]", "text-[11px]", "text-xs"];
+  const opacities = ["opacity-35", "opacity-45", "opacity-55", "opacity-70"];
 
   return (
     <main className="min-h-screen bg-black text-white overflow-hidden">
       <header className="pt-16 pb-8 text-center px-6">
-        <h1 className="text-3xl md:text-5xl leading-tight font-light tracking-tight">
-          letters to geloy
+        <h1 className="text-3xl md:text-5xl leading-tight font-light tracking-tight italic">
+          Letters to Geloy
         </h1>
 
-        <p className="mt-4 text-sm opacity-40">
+        <p className="mt-6 text-sm opacity-40">
           by Geloy Concepcion
         </p>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
           <a
             href="/"
-            className="opacity-50 hover:opacity-100 transition"
+            className="opacity-40 hover:opacity-100 transition"
           >
             Unspoken Words
           </a>
 
           <a
             href="/letters-to-geloy"
-            className="underline underline-offset-8"
+            className="italic font-semibold opacity-100 no-underline"
           >
             Letters to Geloy
           </a>
 
           <a
             href="/submit"
-            className="opacity-50 hover:opacity-100 transition"
+            className="opacity-40 hover:opacity-100 transition"
           >
             Submit
           </a>
@@ -65,18 +66,15 @@ export default async function LettersToGeloyPage() {
         {letters?.map((letter, index) => {
           const row = Math.floor(index / 3);
 
-          const top =
-            row * 420 + randomBetween(120, 260);
-
-          const left =
-            (index % 3) * 30 + randomBetween(4, 18);
+          const top = row * 420 + randomBetween(120, 260);
+          const left = (index % 3) * 30 + randomBetween(4, 18);
 
           return (
             <p
               key={letter.id}
               className={`
                 absolute
-                max-w-[320px]
+                max-w-[260px]
                 leading-relaxed
                 hover:opacity-100
                 hover:scale-105
@@ -97,23 +95,36 @@ export default async function LettersToGeloyPage() {
         })}
       </section>
 
-      {/* MOBILE */}
-      <section className="md:hidden px-6 pb-32 space-y-24">
-        {letters?.map((letter, index) => (
-          <p
-            key={letter.id}
-            className={`
-              leading-relaxed
-              hover:opacity-100
-              transition-opacity
-              ${fonts[index % fonts.length]}
-              ${sizes[index % sizes.length]}
-              ${opacities[index % opacities.length]}
-            `}
-          >
-            {letter.content}
-          </p>
-        ))}
+      {/* MOBILE SCATTERED */}
+      <section className="md:hidden relative min-h-[6200px] px-4 pb-32">
+        {letters?.map((letter, index) => {
+          const row = Math.floor(index / 2);
+
+          const top = row * 250 + randomBetween(80, 180);
+          const left = (index % 2) * 42 + randomBetween(2, 14);
+
+          return (
+            <p
+              key={letter.id}
+              className={`
+                absolute
+                max-w-[160px]
+                leading-relaxed
+                transition-opacity
+                hover:opacity-100
+                ${fonts[index % fonts.length]}
+                ${mobileSizes[index % mobileSizes.length]}
+                ${opacities[index % opacities.length]}
+              `}
+              style={{
+                top: `${top}px`,
+                left: `${left}%`,
+              }}
+            >
+              {letter.content}
+            </p>
+          );
+        })}
       </section>
     </main>
   );

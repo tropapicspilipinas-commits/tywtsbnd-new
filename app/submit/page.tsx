@@ -7,6 +7,8 @@ export default function SubmitPage() {
   const [unspoken, setUnspoken] = useState("");
   const [geloyLetter, setGeloyLetter] = useState("");
 
+  const [message, setMessage] = useState("");
+
   async function submitUnspoken() {
     if (!unspoken) return;
 
@@ -16,11 +18,14 @@ export default function SubmitPage() {
     });
 
     if (error) {
-      alert("Something went wrong.");
+      setMessage("Something went wrong.");
       return;
     }
 
-    alert("Submitted.");
+    setMessage(
+      "Thank you for sharing. You're now part of the project."
+    );
+
     setUnspoken("");
   }
 
@@ -33,11 +38,14 @@ export default function SubmitPage() {
     });
 
     if (error) {
-      alert("Something went wrong.");
+      setMessage("Something went wrong.");
       return;
     }
 
-    alert("Submitted.");
+    setMessage(
+      "Thank you for sharing. You're now part of the project."
+    );
+
     setGeloyLetter("");
   }
 
@@ -158,6 +166,13 @@ export default function SubmitPage() {
             Send letter
           </button>
         </section>
+
+        {/* MESSAGE */}
+        {message && (
+          <p className="text-center text-sm opacity-60 pt-10">
+            {message}
+          </p>
+        )}
       </div>
     </main>
   );

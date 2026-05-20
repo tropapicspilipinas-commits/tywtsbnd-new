@@ -11,7 +11,7 @@ export default async function HomePage() {
     .eq("category", "unspoken")
     .eq("approved", true)
     .order("created_at", { ascending: false })
-    .limit(25);
+    .limit(100);
 
   if (error) {
     return (

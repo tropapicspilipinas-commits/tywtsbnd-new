@@ -1,9 +1,14 @@
 import { supabase } from "./lib/supabase";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shuffleArray<T>(array: T[]) {
+  return [...array].sort(() => Math.random() - 0.5);
 }
 
 export default async function HomePage() {
@@ -21,10 +26,8 @@ export default async function HomePage() {
     );
   }
 
-  // RANDOM ORDER EVERY REFRESH
-  const letters = [...(allLetters || [])]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 100);
+  // RANDOMIZE EVERY REFRESH
+  const letters = shuffleArray(allLetters || []).slice(0, 200);
 
   const fonts = ["font-sans", "font-serif", "italic"];
 
@@ -82,19 +85,19 @@ export default async function HomePage() {
       </header>
 
       {/* DESKTOP */}
-      <section className="relative min-h-[7200px] hidden md:block">
+      <section className="relative min-h-[14000px] hidden md:block">
         {letters.map((letter, index) => {
           const row = Math.floor(index / 3);
 
           const top =
-            row * 420 + randomBetween(120, 260);
+            row * 320 + randomBetween(120, 260);
 
           const left =
             (index % 3) * 30 + randomBetween(4, 18);
 
           return (
             <p
-              key={letter.id}
+              key={`${letter.id}-${Math.random()}`}
               className={`
                 absolute
                 max-w-[260px]
@@ -147,7 +150,7 @@ export default async function HomePage() {
 
           return (
             <p
-              key={letter.id}
+              key={`${letter.id}-${Math.random()}`}
               className={`
                 leading-relaxed
                 transition-opacity

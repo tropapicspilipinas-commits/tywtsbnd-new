@@ -114,22 +114,51 @@ export default async function HomePage() {
       </section>
 
       {/* MOBILE */}
-      <section className="md:hidden px-6 pb-32 space-y-24">
-        {letters?.map((letter, index) => (
-          <p
-            key={letter.id}
-            className={`
-              leading-relaxed
-              hover:opacity-100
-              transition-opacity
-              ${fonts[index % fonts.length]}
-              ${sizes[index % sizes.length]}
-              ${opacities[index % opacities.length]}
-            `}
-          >
-            {letter.content}
-          </p>
-        ))}
+      <section className="md:hidden relative px-4 pb-32 pt-6">
+        {letters?.map((letter, index) => {
+          const alignments = [
+            "ml-0",
+            "ml-auto",
+            "mx-auto",
+          ];
+
+          const widths = [
+            "max-w-[140px]",
+            "max-w-[180px]",
+            "max-w-[220px]",
+          ];
+
+          const margins = [
+            "mb-16",
+            "mb-24",
+            "mb-32",
+          ];
+
+          const mobileSizes = [
+            "text-[11px]",
+            "text-xs",
+            "text-sm",
+          ];
+
+          return (
+            <p
+              key={letter.id}
+              className={`
+                leading-relaxed
+                transition-opacity
+                hover:opacity-100
+                ${fonts[index % fonts.length]}
+                ${mobileSizes[index % mobileSizes.length]}
+                ${opacities[index % opacities.length]}
+                ${alignments[index % alignments.length]}
+                ${widths[index % widths.length]}
+                ${margins[index % margins.length]}
+              `}
+            >
+              {letter.content}
+            </p>
+          );
+        })}
       </section>
     </main>
   );

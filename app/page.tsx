@@ -53,20 +53,23 @@ export default async function HomePage() {
         </p>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
-          <a href="/" className="underline underline-offset-8">
+          <a
+            href="/"
+            className="italic opacity-100"
+          >
             Unspoken Words
           </a>
 
           <a
             href="/letters-to-geloy"
-            className="opacity-50 hover:opacity-100 transition"
+            className="opacity-40 hover:opacity-100 transition"
           >
             Letters to Geloy
           </a>
 
           <a
             href="/submit"
-            className="opacity-50 hover:opacity-100 transition"
+            className="opacity-40 hover:opacity-100 transition"
           >
             Submit
           </a>

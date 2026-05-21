@@ -12,11 +12,11 @@ function shuffleArray<T>(array: T[]) {
   return [...array].sort(() => Math.random() - 0.5);
 }
 
-export default async function LettersToGeloyPage() {
+export default async function HomePage() {
   const { data: allLetters, error } = await supabase
     .from("letters")
     .select("*")
-    .eq("category", "geloy")
+    .eq("category", "unspoken")
     .eq("approved", true)
     .order("created_at", { ascending: false });
 
@@ -38,9 +38,13 @@ export default async function LettersToGeloyPage() {
   return (
     <main className="min-h-screen bg-black text-white overflow-hidden">
       <header className="pt-16 pb-8 text-center px-6">
-        <h1 className="text-3xl md:text-5xl leading-tight font-light tracking-tight italic">
-          Letters to Geloy
-        </h1>
+        <div className="flex justify-center">
+          <img
+            src="/title.png"
+            alt="things you wanted to say but never did"
+            className="w-[420px] md:w-[620px] max-w-full object-contain"
+          />
+        </div>
 
         <p className="mt-6 text-sm opacity-40">
           by Geloy Concepcion
@@ -49,14 +53,14 @@ export default async function LettersToGeloyPage() {
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
           <a
             href="/"
-            className="opacity-40 hover:opacity-100 transition"
+            className="italic font-semibold opacity-100 no-underline"
           >
             Unspoken Words
           </a>
 
           <a
             href="/letters-to-geloy"
-            className="italic font-semibold opacity-100 no-underline"
+            className="opacity-40 hover:opacity-100 transition"
           >
             Letters to Geloy
           </a>

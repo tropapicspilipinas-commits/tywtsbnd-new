@@ -60,28 +60,28 @@ export default async function HomePage() {
           by Geloy Concepcion
         </p>
 
-        <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
-          <a
-            href="/"
-            className="italic opacity-100"
-          >
-            Unspoken Words
-          </a>
+<nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
+  <a
+    href="/"
+    className="opacity-40 hover:opacity-100 transition"
+  >
+    Unspoken Words
+  </a>
 
-          <a
-            href="/letters-to-geloy"
-            className="opacity-40 hover:opacity-100 transition"
-          >
-            Letters to Geloy
-          </a>
+  <a
+    href="/letters-to-geloy"
+    className="italic font-semibold opacity-100 no-underline"
+  >
+    Letters to Geloy
+  </a>
 
-          <a
-            href="/submit"
-            className="opacity-40 hover:opacity-100 transition"
-          >
-            Submit
-          </a>
-        </nav>
+  <a
+    href="/submit"
+    className="opacity-40 hover:opacity-100 transition"
+  >
+    Submit
+  </a>
+</nav></nav>
       </header>
 
       {/* DESKTOP */}

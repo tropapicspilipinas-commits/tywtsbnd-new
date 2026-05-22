@@ -6,15 +6,15 @@ import { supabase } from "../lib/supabase";
 export default function SubmitPage() {
   const [unspoken, setUnspoken] = useState("");
   const [geloyLetter, setGeloyLetter] = useState("");
-
   const [message, setMessage] = useState("");
 
   async function submitUnspoken() {
-    if (!unspoken) return;
+    if (!unspoken.trim()) return;
 
     const { error } = await supabase.from("letters").insert({
       category: "unspoken",
       content: unspoken,
+      approved: false,
     });
 
     if (error) {
@@ -22,19 +22,17 @@ export default function SubmitPage() {
       return;
     }
 
-    setMessage(
-      "Thank you for sharing. You're now part of the project."
-    );
-
+    setMessage("Thank you for sharing. Your submission will be reviewed before it appears.");
     setUnspoken("");
   }
 
   async function submitGeloyLetter() {
-    if (!geloyLetter) return;
+    if (!geloyLetter.trim()) return;
 
     const { error } = await supabase.from("letters").insert({
       category: "geloy",
       content: geloyLetter,
+      approved: false,
     });
 
     if (error) {
@@ -42,10 +40,7 @@ export default function SubmitPage() {
       return;
     }
 
-    setMessage(
-      "Thank you for sharing. You're now part of the project."
-    );
-
+    setMessage("Thank you for sharing. Your submission will be reviewed before it appears.");
     setGeloyLetter("");
   }
 
@@ -61,10 +56,7 @@ export default function SubmitPage() {
         </p>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
-          <a
-            href="/"
-            className="opacity-40 hover:opacity-100 transition"
-          >
+          <a href="/" className="opacity-40 hover:opacity-100 transition">
             Unspoken Words
           </a>
 
@@ -75,17 +67,13 @@ export default function SubmitPage() {
             Letters to Geloy
           </a>
 
-          <a
-            href="/submit"
-            className="italic opacity-100"
-          >
+          <a href="/submit" className="italic opacity-100">
             Submit
           </a>
         </nav>
       </header>
 
       <div className="max-w-3xl mx-auto space-y-24">
-        {/* UNSPOKEN */}
         <section>
           <h2 className="text-xl mb-6 opacity-80">
             Unspoken Words
@@ -94,39 +82,18 @@ export default function SubmitPage() {
           <textarea
             value={unspoken}
             onChange={(e) => setUnspoken(e.target.value)}
-            className="
-              w-full
-              min-h-[220px]
-              bg-transparent
-              border border-white/20
-              p-6
-              text-white
-              placeholder-white/30
-              focus:outline-none
-              focus:border-white/50
-              transition
-              resize-none
-            "
+            className="w-full min-h-[220px] bg-transparent border border-white/20 p-6 text-white placeholder-white/30 focus:outline-none focus:border-white/50 transition resize-none"
             placeholder="What is something you wanted to say but never did?"
           />
 
           <button
             onClick={submitUnspoken}
-            className="
-              mt-6
-              text-sm
-              uppercase
-              tracking-[0.25em]
-              opacity-60
-              hover:opacity-100
-              transition
-            "
+            className="mt-6 text-sm uppercase tracking-[0.25em] opacity-60 hover:opacity-100 transition"
           >
             Submit anonymously
           </button>
         </section>
 
-        {/* LETTERS TO GELOY */}
         <section>
           <h2 className="text-xl mb-6 opacity-80">
             Letters to Geloy
@@ -135,39 +102,18 @@ export default function SubmitPage() {
           <textarea
             value={geloyLetter}
             onChange={(e) => setGeloyLetter(e.target.value)}
-            className="
-              w-full
-              min-h-[260px]
-              bg-transparent
-              border border-white/20
-              p-6
-              text-white
-              placeholder-white/30
-              focus:outline-none
-              focus:border-white/50
-              transition
-              resize-none
-            "
+            className="w-full min-h-[260px] bg-transparent border border-white/20 p-6 text-white placeholder-white/30 focus:outline-none focus:border-white/50 transition resize-none"
             placeholder="How does this project affect you? Any suggestions or recommendations for this project? Anything you want to say to Geloy. And if you can, tell him where you're writing from :)"
           />
 
           <button
             onClick={submitGeloyLetter}
-            className="
-              mt-6
-              text-sm
-              uppercase
-              tracking-[0.25em]
-              opacity-60
-              hover:opacity-100
-              transition
-            "
+            className="mt-6 text-sm uppercase tracking-[0.25em] opacity-60 hover:opacity-100 transition"
           >
             Send letter
           </button>
         </section>
 
-        {/* MESSAGE */}
         {message && (
           <p className="text-center text-sm opacity-60 pt-10">
             {message}

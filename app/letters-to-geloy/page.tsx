@@ -55,9 +55,13 @@ export default async function LettersToGeloyPage() {
   return (
     <main className="min-h-screen bg-black text-white overflow-hidden">
       <header className="pt-16 pb-8 text-center px-6">
-        <h1 className="text-3xl md:text-5xl leading-tight font-light tracking-tight italic">
-          Letters to Geloy
-        </h1>
+        <div className="flex justify-center">
+          <img
+            src="/letters-to-geloy.png"
+            alt="Letters to Geloy"
+            className="w-[320px] md:w-[520px] max-w-full object-contain"
+          />
+        </div>
 
         <p className="mt-6 text-sm opacity-40">
           by Geloy Concepcion

@@ -6,7 +6,7 @@ import { supabase } from "../lib/supabase";
 export default function SubmitPage() {
   const [unspoken, setUnspoken] = useState("");
   const [geloyLetter, setGeloyLetter] = useState("");
-  const [message, setMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   async function submitUnspoken() {
     if (!unspoken.trim()) return;
@@ -17,13 +17,10 @@ export default function SubmitPage() {
       approved: false,
     });
 
-    if (error) {
-      setMessage("Something went wrong.");
-      return;
-    }
+    if (error) return;
 
-    setMessage("Thank you for sharing. Your submission will be reviewed before it appears.");
     setUnspoken("");
+    setShowPopup(true);
   }
 
   async function submitGeloyLetter() {
@@ -35,17 +32,34 @@ export default function SubmitPage() {
       approved: false,
     });
 
-    if (error) {
-      setMessage("Something went wrong.");
-      return;
-    }
+    if (error) return;
 
-    setMessage("Thank you for sharing. Your submission will be reviewed before it appears.");
     setGeloyLetter("");
+    setShowPopup(true);
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-16">
+    <main className="min-h-screen bg-black text-white px-6 py-16 relative">
+      {/* POPUP */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-6">
+          <div className="border border-white/20 bg-black max-w-md w-full p-10 text-center">
+            <p className="text-lg leading-relaxed opacity-90">
+              Thank you for sharing.
+              <br />
+              You are now part of the project.
+            </p>
+
+            <button
+              onClick={() => setShowPopup(false)}
+              className="mt-8 text-sm uppercase tracking-[0.25em] opacity-60 hover:opacity-100 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <header className="text-center mb-20">
         <h1 className="text-3xl md:text-5xl leading-tight font-light tracking-tight">
           submit
@@ -56,7 +70,10 @@ export default function SubmitPage() {
         </p>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
-          <a href="/" className="opacity-40 hover:opacity-100 transition">
+          <a
+            href="/"
+            className="opacity-40 hover:opacity-100 transition"
+          >
             Unspoken Words
           </a>
 
@@ -67,7 +84,10 @@ export default function SubmitPage() {
             Letters to Geloy
           </a>
 
-          <a href="/submit" className="italic opacity-100">
+          <a
+            href="/submit"
+            className="italic opacity-100"
+          >
             Submit
           </a>
         </nav>
@@ -113,12 +133,6 @@ export default function SubmitPage() {
             Send letter
           </button>
         </section>
-
-        {message && (
-          <p className="text-center text-sm opacity-60 pt-10">
-            {message}
-          </p>
-        )}
       </div>
     </main>
   );

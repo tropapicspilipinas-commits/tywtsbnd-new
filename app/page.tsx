@@ -46,9 +46,15 @@ export default async function HomePage() {
           />
         </div>
 
-        <p className="mt-6 text-sm opacity-40">
-          by Geloy Concepcion
-        </p>
+        <div className="mt-6 space-y-3">
+          <p className="text-sm opacity-40">
+            by Geloy Concepcion
+          </p>
+
+          <p className="text-[10px] md:text-[11px] opacity-25 tracking-[0.18em] uppercase">
+            Every visit reveals 200 different anonymous entries from the archive.
+          </p>
+        </div>
 
         <nav className="mt-10 flex justify-center gap-8 text-[11px] uppercase tracking-[0.3em]">
           <a
